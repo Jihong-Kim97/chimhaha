@@ -3,7 +3,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-filenmae = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/짤렉산드리아.csv"
+filenmae = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/짤렉산드리아/짤렉산드리아.csv"
 f = open(filenmae, "w", encoding="utf-8-sig", newline="")
 
 writer = csv.writer(f)
@@ -28,10 +28,10 @@ for page in range(1,11):
         item_res.raise_for_status()
         item_soup = BeautifulSoup(item_res.text, "lxml")
         info = item_soup.find("div", attrs={"class":"info"})
-        category = info.find("div", attrs={"class":"category"}).get_text()
-        nickname = info.find("div", attrs={"class":"nickName"}).get_text()
-        view = info.find("div", attrs={"class":"viewCount"}).get_text()
-        like = info.find("div", attrs={"class":"likeCount"}).get_text()
+        category = info.find("div", attrs={"class":"category"}).get_text().strip()
+        nickname = info.find("div", attrs={"class":"nickName"}).get_text().strip()
+        view = info.find("div", attrs={"class":"viewCount"}).get_text().strip()
+        like = info.find("div", attrs={"class":"likeCount"}).get_text().strip()
 
         data = [title, nickname, category, view, like, datetime, commentCount, image, page_url]
         writer.writerow(data)

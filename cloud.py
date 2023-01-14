@@ -4,21 +4,13 @@ from collections import Counter
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from creatDirectory import createDirectory, createFilename
 
 year = 2022
-int_month = 12
-text_month = ""
-
-if int_month < 10:
-    month = "0"+ str(int_month)
-else:
-    month =str(int_month)
+month = 12
 
 for day in range(1,32):
-    if day < 10:
-        filename = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/소원의돌/{}{}0{}_소원의돌.csv".format(year, month, day)
-    else:
-        filename = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/소원의돌/{}{}{}_소원의돌.csv".format(year, month, day)
+    filename = createFilename("소원의돌",year,month,day,"csv")
     wishes = pd.read_csv(filename)['내용']
     text =""
     for wish in wishes:
