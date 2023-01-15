@@ -9,9 +9,17 @@ from creatDirectory import createDirectory, createFilename
 year = 2022
 month = 12
 
-for day in range(1,32):
+if month == 1 or 3 or 5 or 7 or 8 or 10 or 12:
+    days = range(1, 32)
+elif month == 2:
+    days = range(1,29)
+else:
+    days = range(1,31)
+text_month=''
+
+for day in days:
     filename = createFilename("소원의돌",year,month,day,"csv")
-    wishes = pd.read_csv(filename)['내용']
+    wishes = pd.read_csv(filename)['wish']
     text =""
     for wish in wishes:
         text = text + str(wish)
@@ -53,7 +61,6 @@ for day in range(1,32):
 
 
 # 월단위 cloud 작성
-
 twitter = Twitter()
 
 # twitter함수를 통해 읽어들인 내용의 형태소를 분석한다.
@@ -74,5 +81,5 @@ counts = Counter(noun_adj_list)
 tags = counts.most_common(40) 
 wc = WordCloud(font_path='C:/Windows/Fonts/맑은 고딕/malgunbd.ttf',background_color="white", max_font_size=60)
 cloud = wc.generate_from_frequencies(dict(tags))
-cloud.to_file("C:/Users/KimJihong/Desktop/김지홍/개발/침하하/소원의돌/{}{}_소원의돌_cloud.jpg".format(year, month))
+cloud.to_file("C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/소원의돌/{}/{}/{}{}_소원의돌_cloud.jpg".format(year, month, year, month))
 print("finish!".format(day))

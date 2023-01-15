@@ -3,14 +3,19 @@ import csv
 import requests
 import re
 from bs4 import BeautifulSoup
-import creatDirectory
 from creatDirectory import createDirectory, createFilename
 
-year = 2022
-month = 12
+year = 2023
+month = 1
 dirname = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/소원의돌/{}/{}".format(year, month)
+if month == 1 or 3 or 5 or 7 or 8 or 10 or 12:
+    days = range(1, 32)
+elif month == 2:
+    days = range(1,29)
+else:
+    days = range(1,31)
 
-for day in range(1,32):
+for day in days:
     filename = createFilename("소원의돌",year,month,day,"csv")
     createDirectory(dirname)
     f = open(filename, "w", encoding="utf-8-sig", newline="")
@@ -19,9 +24,15 @@ for day in range(1,32):
     row_title = ['number', 'nickname', 'wish', 'point', 'continuity', 'total']
     writer.writerow(row_title)
     if day < 10:
-        url = "https://chimhaha.net/check?date={}-{}-0{}".format(year, month, day)
+        if month < 10:
+            url = "https://chimhaha.net/check?date={}-0{}-0{}".format(year, month, day)
+        else:
+            rl = "https://chimhaha.net/check?date={}-{}-0{}".format(year, month, day)
     else:
-        url = "https://chimhaha.net/check?date={}-{}-{}".format(year, month, day)
+        if month < 10:
+            url = "https://chimhaha.net/check?date={}-0{}-{}".format(year, month, day)
+        else:
+            url = "https://chimhaha.net/check?date={}-{}-{}".format(year, month, day)
     res = requests.get(url)
     res.raise_for_status()
     soup = BeautifulSoup(res.text, "lxml")
