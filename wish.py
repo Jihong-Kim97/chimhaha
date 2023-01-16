@@ -4,6 +4,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from creatDirectory import createDirectory, createFilename
+#소원의돌 스크래핑
 
 year = 2023
 month = 1

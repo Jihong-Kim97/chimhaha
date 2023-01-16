@@ -4,6 +4,7 @@ from creatDirectory import createDirectory, createFilename
 
 year = 2022
 month = 12
+#소원의돌 일자별 데이터 월별로 병합
 
 if month == 1 or 3 or 5 or 7 or 8 or 10 or 12:
     days = range(1, 32)

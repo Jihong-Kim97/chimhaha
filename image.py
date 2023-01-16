@@ -2,6 +2,7 @@ import csv
 import requests
 import re
 from bs4 import BeautifulSoup
+#짤렉산드리아 스크래핑
 
 filenmae = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/짤렉산드리아/짤렉산드리아.csv"
 f = open(filenmae, "w", encoding="utf-8-sig", newline="")
