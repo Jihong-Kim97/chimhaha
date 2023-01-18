@@ -3,11 +3,15 @@ import requests
 import re
 from bs4 import BeautifulSoup
 import pandas as pd
-
+import time
+from datetime import datetime
 from creatDirectory import createDirectory
 
 url = 'https://chimhaha.net/'
 res = requests.get(url)
+
+d = datetime.now()
+time_name = "/"+ str(d.year) + str(d.month) +str(d.day) + str(d.hour) + str(d.minute)
 
 res.raise_for_status()
 soup = BeautifulSoup(res.text, "lxml")
@@ -24,10 +28,9 @@ for dominions_li in dominions_lis:
     dominions.append(dominions_li.find("a").get_text())
 
 for dominion in dominions:
-    dirname = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/자치령/{}".format(dominion)
-    createDirectory(dirname)
+    dirname = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/자치령"
 
-    filenmae = "{}{}.csv".format(dirname,hrefs[dominion])
+    filenmae = "{}/{}.csv".format(dirname, dominion)
     f = open(filenmae, "w", encoding="utf-8-sig", newline="")
 
     writer = csv.writer(f)
@@ -45,7 +48,7 @@ for dominion in dominions:
 
         boardLists = soup.find_all("section", attrs={"id":"boardList"})
         if(len(boardLists) == 0):
-            print(page)
+            print(str(page) + "page complete!")
             break
         notice = 0
 
