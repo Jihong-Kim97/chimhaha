@@ -27,10 +27,12 @@ for dominions_li in dominions_lis:
     hrefs[dominions_li.find("a").get_text()] = dominions_li.find("a")["href"]
     dominions.append(dominions_li.find("a").get_text())
 
+# print(hrefs)
+
 for dominion in dominions:
     dirname = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/자치령"
 
-    filenmae = "{}/{}.csv".format(dirname, dominion)
+    filenmae = "{}{}.csv".format(dirname, hrefs[dominion])
     f = open(filenmae, "w", encoding="utf-8-sig", newline="")
 
     writer = csv.writer(f)
