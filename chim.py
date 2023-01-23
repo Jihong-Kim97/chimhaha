@@ -2,13 +2,15 @@ import csv
 import requests
 import re
 from bs4 import BeautifulSoup
-from creatDirectory import createDirectory, createFilename
+from utils import createDirectory, createFilename, rel2absTime
+import datetime
 #침착맨 나라 스크래핑
 
 dirname = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/침착맨 나라"
 createDirectory(dirname)
-filenmae = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/침착맨 나라/침착맨.csv"
-f = open(filenmae, "w", encoding="utf-8-sig", newline="")
+filename = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/침착맨 나라/침착맨.csv"
+f = open(filename, "w", encoding="utf-8-sig", newline="")
+now = str(datetime.datetime.now())
 
 writer = csv.writer(f)
 row_title = ['title','nickname','view', 'like', 'date', 'comment', 'page url']
@@ -32,7 +34,7 @@ for page in range(1,500):
             commentCount = item.find("span", attrs={"class":"commentCount"}).get_text()
         else:
             commentCount = 0
-        datetime = item.find("div", attrs={"class":"datetime"}).get_text()        
+        date = rel2absTime(item.find("div", attrs={"class":"datetime"}).get_text(), now)       
         #category = info.find("div", attrs={"class":"category"}).get_text().strip()
         nickname = info.find("div", attrs={"class":"nickName"}).get_text().strip()
         view = info.find("div", attrs={"class":"viewCount"}).get_text().strip()
@@ -41,6 +43,6 @@ for page in range(1,500):
         else:
             like = 0
 
-        data = [title, nickname, view, like, datetime, commentCount, page_url]
+        data = [title, nickname, view, like, date, commentCount, page_url]
         writer.writerow(data)
     print("_________________________")

@@ -5,7 +5,7 @@ import re
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
-from creatDirectory import createDirectory, createFilename
+from utils import createDirectory, createFilename, rel2absTime
 #열혈 접속자 기도를 해당월 마지막일 기준으로 스크래핑
 
 year = 2022

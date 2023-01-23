@@ -39,8 +39,8 @@ for dominion in dominions:
     df_dominion = pd.read_csv('C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/자치령/{}'.format(dominion))
     # df_dominion['month'] = df_dominion['date'].str.split('.', n=1)
     # print(df_dominion.head())
-    df_month = df_dominion.loc[df_dominion['date'].str.startswith(pat='{}'.format(month))]
-    num_post = len(df_dominion.loc[df_dominion['date'].str.startswith(pat='{}'.format(month))])
+    df_month = df_dominion.loc[df_dominion['date'].str.startswith(pat='{}.'.format(month))]
+    num_post = len(df_dominion.loc[df_dominion['date'].str.startswith(pat='{}.'.format(month))])
     num_comment = df_month['comment'].sum()
     num_view = df_month['view'].sum()
     num_like = df_month['like'].sum()

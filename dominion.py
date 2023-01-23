@@ -17,8 +17,7 @@ res.raise_for_status()
 soup = BeautifulSoup(res.text, "lxml")
 nav = soup.find("div", attrs={"class":"navWrap"}).find("nav")
 button_lis = nav.find("ul", attrs={"class":"active two"})
-# print(button_lis[5])
-# index_of_dominions = 5 #자치령 버튼 순서
+
 dominions_lis = button_lis.find_all("li")
 hrefs = {}
 dominions = []

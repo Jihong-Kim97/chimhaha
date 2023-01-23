@@ -3,12 +3,15 @@ import csv
 import requests
 import re
 from bs4 import BeautifulSoup
-from creatDirectory import createDirectory, createFilename
+from utils import createDirectory, createFilename, rel2absTime
+import datetime
 #소원의돌 스크래핑
 
 year = 2023
 month = 1
 dirname = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/소원의돌/{}/{}".format(year, month)
+now = str(datetime.datetime.now())
+
 if month == 1 or 3 or 5 or 7 or 8 or 10 or 12:
     days = range(1, 32)
 elif month == 2:

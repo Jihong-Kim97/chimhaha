@@ -2,10 +2,13 @@ import csv
 import requests
 import re
 from bs4 import BeautifulSoup
+from utils import rel2absTime
+import datetime
 #짤렉산드리아 스크래핑
 
 filenmae = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/짤렉산드리아/짤렉산드리아.csv"
 f = open(filenmae, "w", encoding="utf-8-sig", newline="")
+now = str(datetime.datetime.now())
 
 writer = csv.writer(f)
 row_title = ['게시물 제목','게시자', '분류', '조회수', '좋아요 수', '업로드 날짜', '댓글 수', '이미지 url', '페이지 url']
@@ -23,7 +26,7 @@ for page in range(1,11):
         image = item.find("div", attrs={"class":"image"}).img["style"][23:-3]
         title = item.find("div", attrs={"class":"info"}).span.get_text()
         commentCount = item.find("span", attrs={"class":"commentCount"}).get_text()
-        datetime = item.find("span", attrs={"class":"datetime"}).get_text()        
+        date = rel2absTime(item.find("span", attrs={"class":"datetime"}).get_text(), now)   
 
         item_res = requests.get(page_url)
         item_res.raise_for_status()
@@ -34,6 +37,6 @@ for page in range(1,11):
         view = info.find("div", attrs={"class":"viewCount"}).get_text().strip()
         like = info.find("div", attrs={"class":"likeCount"}).get_text().strip()
 
-        data = [title, nickname, category, view, like, datetime, commentCount, image, page_url]
+        data = [title, nickname, category, view, like, date, commentCount, image, page_url]
         writer.writerow(data)
     print("_________________________")
