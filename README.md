@@ -1,7 +1,5 @@
 # Chimhaha
-* * *
-
-침하하 홈페이지 데이터를 수집하여 분석하는 프로젝트
+침하하 홈페이지(https://chimhaha.net/) 데이터를 수집하여 분석하는 프로젝트
 ![ex_screenshot](./chimhaha.png)
 
 ## 1. Ideas
