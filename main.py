@@ -1,7 +1,4 @@
-from wishScraping import wishScraping
-from wishConcat import wishConcat
-from wishLoyal import wishLoyal
-from wishCloud import wishCloud
+from wish import wishScraping, wishConcat, wishLoyal, wishCloud
 
 year = 2023
 month = 1
