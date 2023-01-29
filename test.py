@@ -1,8 +1,7 @@
 from utils import rel2absTime
 import datetime
+import csv
 
-d = str(datetime.datetime.now())
-d = "2023-01-05 16:50:43.895283"
-r = rel2absTime("7일전", d)
-print(d)
-print(r)
+board = "우리동네추천"
+filename = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/{}/{}.csv".format(board, board)
+f = open(filename, "w", encoding="utf-8-sig", newline="")

@@ -47,7 +47,6 @@ def rel2absTime(rel_date, datetime):
     else:
         normal = True
 
-    print(month,day,hour,minute)
     if minute < 0:
         minute += 60
         hour -= 1
