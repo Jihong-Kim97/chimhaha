@@ -32,5 +32,9 @@ https://datastudio.google.com/reporting/9adc2532-8f79-4291-8c2e-e70f3ccaa811
 https://chimhaha.net/stream_free/120546
 https://datastudio.google.com/reporting/a70fda35-11a1-467c-babd-b1ee2796d5a0
 
+- 침하하 우리동네추천 게시판 분석
+https://chimhaha.net/stream_free/127500
+https://lookerstudio.google.com/reporting/ec5197ad-60c0-45b7-9644-613cfeb4bfe7
+
 ## 5. Reference
 - https://wikidocs.net/87477
