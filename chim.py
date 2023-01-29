@@ -1,8 +1,7 @@
 import csv
 import requests
-import re
 from bs4 import BeautifulSoup
-from utils import createDirectory, createFilename, rel2absTime
+from utils import createDirectory, rel2absTime
 import datetime
 #침착맨 나라 스크래핑
 

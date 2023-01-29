@@ -12,7 +12,7 @@
 - 자치령
 - 침착맨 게시판: https://chimhaha.net/stream_free
 - 짤렉산드리아 도서관: https://chimhaha.net/humor_try/likes/zilioner
-
+- 우리동네추천 게시판: https://chimhaha.net/mycity
 
 ## 3. How-to
 1. 웹스크래핑을 통해 데이서 수집

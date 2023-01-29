@@ -6,24 +6,40 @@ from konlpy.tag import Twitter
 from collections import Counter
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 from utils import createDirectory, createFilename, rel2absTime
 from tqdm import tqdm
+import datetime
+import os
+import warnings
 
 #소원의돌 스크래핑
 def wishScraping(year, month):
-    board_name = "소원의돌"
     dirname = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/소원의돌/{}/{}".format(year, month)
-    if month == 1 or 3 or 5 or 7 or 8 or 10 or 12:
-        days = range(1, 32)
-    elif month == 2:
-        days = range(1,29)
+
+    now = str(datetime.datetime.now())
+    now_month = int(now[5:7])
+    now_day = int(now[8:10])
+
+    start_day = 1
+    for day in range(1,32):
+        filename = createFilename("소원의돌",year,month,day,"csv")
+        if not os.path.exists(filename):
+            start_day = day - 1
+            break
+
+    if now_month > month:
+        if month == 1 or 3 or 5 or 7 or 8 or 10 or 12:
+            days = range(start_day, 32)
+        elif month == 2:
+            days = range(start_day,29)
+        else:
+            days = range(start_day,31)
     else:
-        days = range(1,31)
+        days = range(start_day,now_day + 1)
 
     for day in tqdm(days, desc='{}월 소원의돌 수집중'.format(month)):
         #csv 파일 해더 입력
-        filename = createFilename(board_name,year,month,day,"csv")
+        filename = createFilename("소원의돌",year,month,day,"csv")
         createDirectory(dirname)
         f = open(filename, "w", encoding="utf-8-sig", newline="")
         writer = csv.writer(f)
@@ -70,6 +86,8 @@ def wishConcat(year, month):
 
     for day in tqdm(days, desc='{}월 소원의돌 병합중'.format(month)):
         filename = createFilename("소원의돌",year,month,day,"csv")
+        if not os.path.exists(filename):
+            break
         df_wish = pd.read_csv(filename)
         df_wish['date'] = "{}.{}.{}".format(year, month, day)
         df_all = pd.concat([df_all, df_wish])
@@ -152,6 +170,7 @@ def wishLoyal(year, month):
 
 #해당월 소원의 돌 워드클라우드 일자별, 월별로 생성
 def wishCloud(year, month):
+    warnings.filterwarnings('ignore')
     if month == 1 or 3 or 5 or 7 or 8 or 10 or 12:
         days = range(1, 32)
     elif month == 2:
@@ -162,6 +181,8 @@ def wishCloud(year, month):
 
     for day in tqdm(days, desc='{}월 소원의돌 wordcloud 생성중'.format(month)):
         filename = createFilename("소원의돌",year,month,day,"csv")
+        if not os.path.exists(filename):
+            break
         wishes = pd.read_csv(filename)['wish']
         text =""
         for wish in wishes:
