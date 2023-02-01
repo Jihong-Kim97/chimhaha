@@ -219,7 +219,6 @@ def wishCloud(year, month):
 
         # 생성된 WordCloud를 test.jpg로 보낸다.
         cloud.to_file(filename[:-4]+"_cloud.jpg")
-        print("{}day finish!".format(day))
 
 
 
