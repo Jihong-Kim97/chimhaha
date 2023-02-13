@@ -17,6 +17,7 @@ seoul_gu = ['은평', '강서', '양천', '구로', '금천', '동작', '영등�
 
 df_geo = pd.read_csv("C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/우리동네추천/geo.csv", encoding='cp949')
 df_city = df_geo['Korean']
+titles = []
 
 writer = csv.writer(f)
 row_title = ['title','nickname','view', 'like', 'date', 'comment', 'page url', 'city_kor', 'city_eng']
@@ -27,7 +28,7 @@ for page in range(1,500):
     res.raise_for_status()
     soup = BeautifulSoup(res.text, "lxml")
     items = soup.find_all("a", attrs={"class":"item"})
-    if len(items) == 0:
+    if len(items) == 1:
         break
     print("____________{}___________".format(page))
 
@@ -67,5 +68,7 @@ for page in range(1,500):
             like = 0
 
         data = [title, nickname, view, like, date, commentCount, page_url, city_kor, city_eng]
-        writer.writerow(data)
+        if not title in titles:
+            writer.writerow(data)
+        titles.append(title)
     print("_________________________")

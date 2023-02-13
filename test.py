@@ -1,7 +1,10 @@
 from utils import rel2absTime
 import datetime
 import csv
+import datetime
 
-board = "우리동네추천"
-filename = "C:/Users/KimJihong/Desktop/김지홍/개발/침하하/DB/{}/{}.csv".format(board, board)
-f = open(filename, "w", encoding="utf-8-sig", newline="")
+now = str(datetime.datetime.now())
+now_year = now[0:4]
+now_month = int(now[5:7])
+now_day = int(now[8:10])
+print(now_year)
